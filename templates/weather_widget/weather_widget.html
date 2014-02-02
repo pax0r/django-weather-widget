@@ -1,0 +1,21 @@
+
+{% load humanize %}
+{% load weather-widget %}
+<div style="width: 170px;">
+{% for day in data.list %}
+{% with day.weather|first as first_weather %}
+<div style="clear: both;">
+<div style="clear: both"> <big>{{ day.dt|naturalday|capfirst }} </big></div>
+<div style="float: left">
+    <img src="http://openweathermap.org/img/w/img/{{ first_weather.icon }}.png" width="50" height="50">
+</div>
+<div style="float: right; width: 90px; text-align: right;">
+    <big><big><b>{{ day.temp.day|floatformat:"0"|format_temperature|safe }}</b></big></big> <br />
+    <small>min. {{ day.temp.min|floatformat:"0"|format_temperature|safe }} </small><br />
+    <small>{{ first_weather.description }}</small>
+</div>
+</div>
+<div style="clear: both"></div>
+  {% endwith %}
+{% endfor %}
+</div>
